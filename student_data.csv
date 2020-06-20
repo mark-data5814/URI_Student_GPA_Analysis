@@ -1,0 +1,91 @@
+﻿Gender,Age,Major,Double_Major,Minor,Academic_Level,Student_Status,Grade,GPA,Hours_Studying,Study_Location,Study_Group,Housing1,Housing2,Home_State,Hours_Sleep,Post_Grad,Campus_Org,Employed,Hours_Work
+F,22,KIN,N,0,4,Full-time,B+,3.5,4,Library,Alone,Off,Friends,NJ,7.5,Grad school,3,Y,15
+F,21,PRS,Y,1,4,Full-time,B-,2.7,10,Library,Alone,Off,Friends,PA,6,Work,1,Y,10
+M,22,CSC,N,0,4,Full-time,B+,3.5,10,Classroom,Group,Off,Friends,RI,8,Work,1,Y,10
+F,22,PHP,N,0,4,Full-time,B,3.2,20,Home,Alone,Off,Friends,RI,6,Work,3,Y,15
+M,21,COM,N,1,4,Full-time,B-,2.9,6,Library,Group,Off,Friends,RI,5,Work,1,Y,8
+M,22,BUS,N,0,4,Full-time,B,3.21,5,Home,Alone,Off,Friends,RI,9,Work,1,Y,6
+F,21,TMD,N,1,4,Full-time,B,3.2,3,Home,Alone,Off,Friends,MA,8,Work,2,Y,6
+F,19,CCJ,N,0,2,Full-time,B-,2.8,6,Library,Group,On,Greek,NJ,7,Work,1,Y,6
+F,20,KIN,N,0,3,Full-time,B+,3.6,17.5,Home,Alone,On,Greek,RI,6,Grad school,1,Y,17.5
+F,19,NUR,N,0,2,Full-time,B,3,20,Library,Alone,On,Greek,NJ,5,Work,1,N,0
+F,20,MLS,N,0,3,Full-time,B-,2.85,25,Library,Alone,On,Dorm,MA,6,Work,4,Y,20
+F,19,BIO,N,0,2,Full-time,B,3.2,17.5,Home,Alone,On,Greek,CT,7,Grad school,1,Y,10
+F,20,NUR,N,0,2,Full-time,B+,3.67,20,Library,Alone,On,Greek,MA,6,Work,2,N,0
+F,20,CMD,N,2,3,Full-time,B,3.1,12.5,Home,Alone,Off,Friends,CT,6,Grad school,3,Y,25
+F,19,TMD,N,1,2,Full-time,B,3.27,10,Library,Group,On,Greek,CT,6.5,Work,1,Y,5
+F,20,PRS,N,1,3,Full-time,B-,2.9,6,Home,Alone,Off,Friends,CT,8,Work,1,N,0
+F,20,PHP,N,0,3,Full-time,B+,3.63,20,Home,Alone,On,Dorm,NY,6.5,Work,4,N,0
+F,21,BME,N,0,3,Full-time,B+,3.3,10,Classroom,Group,Off,Friends,NJ,7,Work,1,N,0
+F,22,BUS,N,1,4,Full-time,A-,3.8,7,Home,Alone,Off,Friends,NJ,8,Work,4,Y,20
+F,21,BUS,N,0,3,Full-time,A-,3.8,15,Library,Alone,On,Greek,NJ,8,Work,3,Y,6
+F,20,PHP,N,1,3,Full-time,B+,3.67,25,Library,Group,Off,Friends,NY,7,Work,1,N,0
+F,21,PHP,N,0,3,Full-time,A-,3.72,21,Library,Alone,On,Greek,NY,7,Work,1,N,0
+F,18,OCG,N,0,1,Full-time,C+,2.3,7,Library,Alone,On,Greek,MA,7,Work,1,N,0
+F,18,BIO,N,0,1,Full-time,B+,3.35,40,Classroom,Alone,On,Dorm,RI,6,Grad school,1,N,0
+F,19,NUR,N,0,1,Full-time,B-,2.95,12,Library,Group,On,Dorm,PA,7,Grad school,1,N,0
+F,21,PHP,N,0,4,Full-time,B,3.2,12,Library,Group,Off,Friends,MA,7,Work,1,Y,8
+M,19,BME,Y,0,2,Full-time,A-,3.72,14,Classroom,Group,On,Dorm,RI,7,Work,1,N,0
+F,21,MTH,N,1,4,Full-time,B+,3.53,10,Home,Alone,Off,Friends,RI,8,Work,2,Y,20
+F,19,KIN,N,0,2,Full-time,B+,3.49,8,Home,Alone,On,Dorm,OR,7,Grad school,1,Y,5
+F,19,Pre-Med,N,0,1,Full-time,B+,3.3,16,Home,Alone,On,Dorm,NJ,6,Grad school,0,N,0
+F,19,PLS,N,0,2,Full-time,C+,2.3,25,Library,Alone,On,Greek,RI,7,Work,0,N,0
+F,20,HDF,N,0,2,Full-time,B-,2.9,4,Library,Group,On,Greek,CT,7,Work,0,N,0
+F,19,PSY,Y,0,2,Full-time,A-,3.7,9,Home,Alone,Off,Friends,PA,8,Grad school,0,N,0
+M,20,KIN,N,0,4,Full-time,B+,3.3,12,Library,Alone,Off,Friends,NJ,8,Grad school,0,N,0
+M,21,COM,N,0,4,Full-time,B+,3.6,4,Home,Alone,Off,Friends,RI,8,Work,1,Y,40
+M,20,BUS,N,1,2,Full-time,B-,2.76,5,Library,Group,On,Dorm,NJ,6.5,Work,2,N,0
+M,20,BUS,N,0,2,Full-time,B,3.12,3.5,Library,Group,Off,Friends,NJ,6,Work,1,N,0
+M,20,BUS,N,0,2,Full-time,B-,2.7,8,Home,Alone,Off,Friends,NY,7,Grad school,1,N,0
+M,21,AFS,N,1,3,Full-time,B,3.02,6,Library,Alone,Off,Friends,CT,8,Grad school,1,Y,15
+M,21,HSA,N,1,4,Part-time,A-,3.95,10,Classroom,Alone,Off,Friends,RI,8,Work,2,Y,24
+M,20,BIO,N,0,2,Full-time,A-,3.78,15,Home,Alone,Off,Friends,MA,7,Grad school,2,Y,50
+M,18,BUS,N,0,1,Full-time,B-,2.9,6,Home,Group,On,Dorm,NY,8,Work,1,N,0
+M,19,PSC,N,0,1,Full-time,C+,2.6,6,Library,Alone,On,Dorm,MA,6.5,Work,1,Y,10
+M,20,CSC,N,0,2,Full-time,B-,2.83,15,Home,Alone,On,Dorm,RI,7,Grad school,2,N,0
+M,21,BUS,N,0,3,Full-time,C+,2.51,3.5,Home,Alone,Off,Alone,RI,10,Work,2,Y,20
+M,19,COM,N,0,2,Full-time,B-,2.8,11,Library,Alone,On,Dorm,NJ,7.5,Work,0,N,0
+M,20,OCE,N,0,2,Full-time,A-,3.85,17.5,Home,Alone,On,Dorm,RI,7,Work,1,N,0
+M,22,BUS,N,0,4,Full-time,B+,3.6,2,Home,Alone,Off,Friends,NJ,6,Work,0,N,0
+M,19,PSY,N,1,2,Full-time,B,3.1,15,Home,Alone,On,Dorm,CT,8,Grad school,1,Y,4
+M,21,HIS,N,0,4,Full-time,C+,2.3,10,Home,Alone,Off,Friends,NY,6,Grad school,1,N,0
+M,20,OCE,N,0,2,Full-time,B-,2.87,15,Library,Group,On,Dorm,RI,7,Work,2,N,0
+F,18,CMD,N,0,1,Full-time,B-,2.7,2.5,Home,Alone,On,Dorm,RI,8,Grad school,1,N,0
+M,22,CVE,N,0,4,Full-time,B-,2.8,20,Home,Alone,Off,Friends,NJ,6.5,Work,0,N,0
+F,21,NUR,N,0,3,Full-time,B,3.19,20,Home,Alone,Off,Friends,MA,8,Work,1,Y,8
+F,19,NUR,N,0,1,Full-time,B+,3.6,20,Library,Alone,On,Dorm,MA,7.5,Work,1,N,0
+F,22,PSY,N,0,4,Full-time,B,3.1,7.5,Library,Alone,Off,Friends,NY,8,Grad school,1,Y,20
+F,21,NUR,N,0,4,Full-time,B+,3.65,4,Home,Alone,Off,Friends,NY,8,Grad school,0,N,0
+F,19,COM,N,1,2,Full-time,A-,3.91,15,Home,Alone,On,Greek,RI,8,Grad school,0,Y,12
+F,19,CCJ,Y,0,1,Full-time,B+,3.4,20,Home,Alone,On,Dorm,CT,8,Grad school,1,N,0
+F,21,PSY,N,2,3,Full-time,B+,3.41,4,Home,Alone,Off,Friends,RI,5.5,Grad school,3,Y,16.5
+F,19,EDC,N,1,1,Full-time,C,2.2,20,Home,Alone,On,Greek,NJ,6,Grad school,1,N,0
+F,20,TMD,N,1,3,Full-time,B-,2.9,20,Home,Alone,Off,Friends,CT,6,Work,1,N,0
+F,21,HSA,N,1,3,Full-time,B+,3.6,10,Home,Alone,Off,Friends,NJ,6.5,Work,1,Y,10
+F,22,PHP,N,2,4,Full-time,B+,3.43,35,Home,Alone,Off,Friends,NY,6,Work,0,Y,11
+F,21,PHP,N,0,4,Full-time,B+,3.49,40,Home,Alone,Off,Friends,NH,7,Work,1,Y,15
+M,22,PHP,N,0,4,Full-time,B+,3.4,5,Home,Alone,Off,Friends,RI,6.5,Work,1,Y,10
+M,21,PHP,N,0,4,Full-time,B+,3.4,7,Home,Alone,Off,Friends,RI,6,Work,1,Y,8
+F,21,PHP,N,0,4,Full-time,B,3.1,20,Library,Group,Off,Friends,NJ,6,Work,1,Y,8
+F,21,BIO,N,1,4,Full-time,B+,3.6,10,Home,Alone,Off,Friends,RI,8,Grad school,1,Y,30
+F,19,KIN,N,0,2,Full-time,B+,3.38,8,Library,Group,Off,Friends,NJ,6,Grad school,2,N,0
+F,21,HSA,N,0,2,Full-time,B,3.19,28,Library,Group,Off,Friends,MA,6,Grad school,3,Y,17
+F,18,NUR,N,0,1,Full-time,B-,2.99,10,Home,Alone,On,Dorm,NJ,7,Work,1,N,0
+F,18,NUR,N,0,1,Full-time,B+,3.34,25,Home,Alone,On,Dorm,CT,7,Work,0,N,0
+F,19,COM,N,2,1,Full-time,A-,3.87,21,Library,Alone,On,Dorm,NJ,7,Work,2,Y,5
+F,19,HDF,N,0,2,Full-time,B-,2.94,15.5,Library,Alone,Off,Friends,ME,7.5,Grad school,1,Y,12
+F,19,KIN,N,0,1,Full-time,A-,3.94,15,Home,Alone,On,Dorm,NJ,7,Grad school,0,N,0
+F,19,EDC,N,1,2,Full-time,B,3.01,40,Home,Alone,On,Greek,RI,6,Work,1,Y,10
+M,18,PHP,N,0,2,Full-time,B-,2.8,15,Library,Group,Off,Alone,RI,7,Work,1,N,0
+F,21,EDC,N,1,3,Full-time,B,3,10,Home,Alone,On,Greek,CT,8,Grad school,1,Y,15
+F,20,NUR,N,1,3,Full-time,A-,3.89,25,Coffee shop,Group,Off,Family,CT,7,Work,1,Y,15
+F,20,NUR,N,0,2,Full-time,A-,3.75,37.5,Home,Alone,On,Dorm,CT,7,Grad school,2,N,0
+F,19,NUR,N,0,2,Full-time,A-,3.85,40,Library,Alone,On,Greek,NJ,6,Work,1,Y,6
+F,18,NUR,N,0,1,Full-time,B+,3.55,35,Library,Alone,On,Dorm,CT,8,Work,1,N,0
+F,22,PHP,Y,0,4,Full-time,A-,3.7,40,Home,Alone,Off,Friends,NY,5,Work,1,Y,15
+F,19,TMD,N,1,2,Full-time,B+,3.4,20,Library,Alone,On,Greek,CT,8,Work,1,N,0
+F,21,CCJ,Y,0,4,Part-time,B,3.2,37.5,Library,Alone,Off,Friends,CT,6,Work,1,N,0
+F,18,PSC,Y,0,1,Full-time,B,3.06,4,Home,Alone,On,Dorm,NY,9,Grad school,1,N,0
+F,22,BIO,N,0,4,Full-time,B,3.1,5,Home,Alone,Off,Friends,NJ,8,Work,1,Y,12
+F,20,BUS,N,0,2,Full-time,A-,3.8,12,Home,Alone,On,Greek,NJ,8,Work,1,N,0
+F,25,BIO,Y,0,5,Full-time,B+,3.43,15,Home,Alone,Off,Friends,CT,7,Work,0,Y,20

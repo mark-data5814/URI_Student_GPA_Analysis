@@ -1,0 +1,260 @@
+---
+title: "URI Student GPA Analysis"
+author: "Mark Rogers, Audrianna Casey, Ryan Viti"
+date: "6/20/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Change this to your location
+setwd("C:/GitProjects/URI_Student_GPA_Analysis")
+library(stringr)
+library(car)
+library(e1071)
+library(tree)
+```
+
+# Introduction
+
+Our group decided to take a look at what factors play in college students receiving their GPA. In order to collect data, we created a Google Forms survey and shared it amongst our peers and within our campus organizations. We received a great deal of responses, and with real world data we hope to gain some insight as to what influences students receiving high, or low, GPAs, and other insight into college students as a whole. To do this, we will form different hypotheses, and perform respective analysis approaches to draw conclusions from our data. Our first question of interest is; can we create a classification tree that is able to accurately predict students’ GPA letter grade? Our second question is; can we use GPA and Hours_Work to determine if students are in a study group? And finally, can a multi-class support vector machine accurately predict students’ GPA letter grade?
+# Descriptive Statistics
+
+To start, we will show the names of our variables and the head of the data set.
+
+```{r, echo=FALSE}
+# Read dataset
+data = read.csv("student_data.csv", row.names = NULL)
+# Correct Gender column name  
+colnames(data)[1] = "Gender"
+names(data)
+head(data)
+```
+
+Before we could get to work on our analysis, we needed to do some data processing in order to perform our analysis approaches. The first thing we did was clean up our .csv file and remove the null values and cleaned up our survey answers. For example, we received different forms of the same answer on our survey, such as “RI” and “Rhode Island” as home state, so we normalized all these by hand in Excel. The second thing we needed to do was correct the variables that have factors of only two levels, which will give us an error when making our models. We corrected this by creating dummy variables, 0s and 1s, for variables with only two factor levels. These variables were “Double_Major”, “Student_Status”, “Study_Group”, “Housing1”, and “Employed”. Below you can see the resulting tables of values for each variable after using the ifelse() function for the correction.
+
+```{r, echo=FALSE}
+# Double_Major
+data$Double_Major = ifelse(data$Double_Major == "N", 0, 1)
+print("Double_Major -> 0 = Single Major ; 1 = Double Major")
+table(data$Double_Major)
+
+# Student_Status
+data$Student_Status = ifelse(data$Student_Status == "Full-time", 0, 1)
+print("Student_Status -> 0 = Full-time ; 1 = Part-time")
+table(data$Student_Status)
+
+# Study_Group
+data$Study_Group = ifelse(data$Study_Group == "Alone", 0, 1)
+print("Study_Group -> 0 = Studies alone ; 1 = Studies in a group")
+table(data$Study_Group)
+
+# Housing1
+data$Housing1 = ifelse(data$Housing1 == "Off", 0, 1)
+print("Housing1 -> 0 = Lives off campus ; 1 = Lives on campus")
+table(data$Housing1)
+
+# Employed
+data$Employed = ifelse(data$Employed == "Y", 0, 1)
+print("Employed -> 0 = Employed ; 1 = Unemployed")
+table(data$Employed)
+```
+
+Here we take a look at the values and value counts of our main response variable, GPA. We will also plot these values of GPA with a histogram as shown below.
+
+```{r, echo=FALSE}
+table(data$GPA)
+
+# Histogram
+hist(data$GPA, main="GPA Histogram")
+```
+
+Now we output the maximum, minimum, and median of GPA.
+
+```{r}
+max(data$GPA)
+min(data$GPA)
+median(data$GPA)
+```
+
+Also, we will look at the mean value, variance, and standard deviation of GPA.
+
+```{r}
+mean(data$GPA)
+var(data$GPA)
+sd(data$GPA)
+```
+
+## Analysis
+
+#### First Analysis: Classification Tree
+
+The response variable in this case is the categorical variable “Grade” which equates students’ numerical GPA to a letter grade A, A-, B+, B, and so on). The variables used in the construction of the tree are the student’s major (categorical), number of hours spent studying (numerical). The first type of analysis we did is a classification tree which is used to predict categorical variables. We chose to use a classification tree because the relationship between many of the predictors is non-linear which was seen using the pairs() function on our data set.
+
+```{r, include=F}
+pairs(data)
+```
+
+We proceed with the analysis under the hypothesis that a classification tree can accurately predict GPA using at least one terminal node. We split the data into training and test data. 
+
+```{r}
+set.seed(2020)
+tree_train = sample(90, 81)
+data.tree = tree(Grade ~ .-GPA, data, subset = tree_train)
+summary(data.tree)
+```
+
+```{r, echo=F, fig.height = 6, fig.width = 10}
+plot(data.tree)
+text(data.tree,pretty=0)
+```
+
+```{r}
+set.seed(2020)
+tree_test=data[-tree_train,]
+Grade.test=data$Grade[-tree_train]
+tree.pred=predict(data.tree,tree_test,type="class")
+#table(tree.pred,Grade.test)
+table(tree.pred, data[-tree_train, "Grade"])
+```
+
+The tree correctly classifies only 22.22% of the observations. We pruned the tree once and performed cross-validation. 
+
+```{r}
+cv.data=cv.tree(data.tree, FUN=prune.misclass)
+names(cv.data)
+cv.data
+par(mfrow=c(1,2))
+plot(cv.data$size, cv.data$dev, type="b")
+plot(cv.data$k, cv.data$dev, type="b")
+```
+
+```{r, fig.height=5, fig.width=8}
+prune.data=prune.misclass(data.tree,best=5)
+plot(prune.data)
+text(prune.data,pretty=0)
+```
+
+```{r}
+tree.pred=predict(prune.data, tree_test, type="class")
+table(tree.pred, Grade.test)
+(1+3+1+3+4+4)/18
+```
+Proceeding with a value of best=3, we correctly classify 31.11% of the observations. While the pruned tree provides more significant results than the original tree, we can conclude that a classification tree does not perform the best in accurately predicting a student’s Grade based on major and the number of hours spent studying on average per week.
+
+##### Random Forest
+
+```{r}
+library(randomForest)
+set.seed(2020)
+bag.data = randomForest(Grade ~ .-GPA, data = data, mtry = 9, importance = TRUE)
+bag.data
+```
+
+```{r}
+importance(bag.data)
+```
+
+```{r}
+varImpPlot(bag.data)
+```
+
+
+#### Second Analysis: Two-Class Support Vector Machine
+
+For our initial SVM, we use our binary variable, `Study_Group` as our response, where a 1 indicates a given student is part of a study group, and a 0 indicates otherwise.  Our explanatory variables for this analysis are `GPA` and `Hours_Work`.  `GPA` is a continuous, numeric variable indicating a student's GPA as of Fall 2019.  `Hours_Work` indicates on average how many hours a student works at a job (full-time or part-time), which is a discrete, numeric variable.  The Support Vector Machine is our approach to this classification problem.  This is a relevant approach because our hypothesis looks to determine a binary response variable based on two explanatory variables related to that response variable.  Some possible limitations to this approach include the fact that one of our explanatory variables is not continuous, which creates a distorted picture of the traditional SVM plot, noting clear gaps in one dimension of our explanatory variable plot.  A small sample of respondents is another potential issue, but we continue since there are only so many resources available to us.  Our hypothesis is stated as: A student's GPA and the number of hours of work they get each night can determine if they are likely to be a part of a study group on campus.  Since our classification boundaries were not linear, we are inclined to utilize a radial kernel for our SVM as opposed to the default, linear kernel.  This will most likely give us a more appropriate output and more accurate classification rate.  We could have chosen Logistic Regression as our model of choice here as well, but as was discussed in class, we should utilize SVM when our decision boundaries appear to be nonlinear.  Also, the fact that we have classes that are nearly separable, using SVM is the optimal choice.
+
+```{r,echo=F}
+x = data.frame(data$GPA, data$Hours_Work)
+y = data$Study_Group
+class(x)
+class(y)
+```
+
+```{r,echo=F}
+svm_dat = data.frame(x=x, y=as.factor(y))
+plot(x, col = y + 1, main="Hours_Work vs. GPA")
+```
+
+```{r,echo=F}
+set.seed(2020)
+svm_train = sample(90, 81)
+svm_fit = svm(y ~ ., data = svm_dat[svm_train,], kernel="radial", gamma=1, cost=1e5) #based on best model parameters determined below
+summary(svm_fit)
+plot(svm_fit, svm_dat[svm_train,])
+```
+
+```{r,echo=F}
+set.seed(2020)
+tune.out = tune(svm, y ~ ., data = svm_dat[svm_train,], kernel = "radial",
+                ranges = list(cost = c(0.1,1,10,100,1000,10000), gamma = c(0.01,0.1,1,10)))
+summary(tune.out)
+tune.out$best.parameters
+```
+
+```{r}
+table(true=svm_dat[-svm_train,"y"], pred=predict(tune.out$best.model,newdata = svm_dat[-svm_train,]))
+```
+
+```{r}
+1/9 #based on table above
+```
+
+11.11% of test observations are misclassified by our SVM.
+
+Therefore, we see that based on our dataset training and testing data for the SVM, our model incurs a 22.22% misclassification rate, meaning we classify correctly 87.88% of the time.  Our optimal cost and gamma parameters came out to be 0.1 and 0.01, according to tuning function. In general, this seems like a strong model to use for future prediction.
+
+#### Analysis Three: Multi-Class Support Vector Machine
+
+For our third analysis, we will use a multi-class support vector machine to look into classifying students' GPAs. Since the value of k would be too large if we used each individual value of GPA as a class, we decided to create a new column "Grade" that is the letter grade corresponding to the GPA value. This means “Grade” is our response variable for this analysis, with k equalling 6 since the column covers grades A-, A, B+, B, B-, and C+ (no one who took our survey had a 4.0 GPA or less than a 2.3 GPA). The explanatory variables are Age (in years), Double_Major (yes/no), Minor (number of minors), Academic_Level (grade year), Hours_Studying (in hours), Study_Group (yes/no), Housing1 (on-campus/off-campus), Hours_Sleep (in hours), Campus_Org (yes/no), Employed (yes/no), and Hours_Work (in hours). As stated in the descriptive statistics section, we encoded yes/no answers into 0s and 1s. When performing the svm() function, we will use a one-versus-one approach, which is the default for the function. Here we decided to use SVM and not Logistic regression because our classes are nearly separable, and contain nonlinear boundaries. Our hypothesis is as follows: Using the predictors above, we can accurately predict a student’s grade.
+
+```{r, include=F}
+a = data[,-c(1,3,8,7,9,11,14,15,17)]
+b = data$Grade
+class(data$Grade)
+df = data.frame(a=a, b=b)
+```
+
+```{r}
+set.seed(2020)
+msvm_train = sample(90, 81)
+svm.fit = svm(b ~ ., data = df[msvm_train,], kernel = "radial", cost = 1e5, gamma = 1)
+summary(svm.fit)
+```
+
+```{r, echo=F}
+table(svm.fit$fitted, df[msvm_train, "b"])
+```
+
+Here we see our SVM model performs well with the training data. Now we perform cross validation to find the optimal values for cost and gamma.
+
+```{r}
+set.seed(2020)
+tune.out = tune(svm, b ~ ., data = df[msvm_train,], kernel = "radial",
+                ranges = list(cost = c(0.1,1,10,100,1000,10000), gamma = c(0.5,1,2,3,4,5,6)))
+summary(tune.out)
+```
+
+With the optimal values of cost and gamma, we find the predictions with our test data.
+
+```{r, echo=F}
+table(true=df[-msvm_train,"b"], pred=predict(tune.out$best.model,newdata = df[-msvm_train,]))
+```
+
+```{r}
+(1+3+2+1)/9
+```
+
+66.67% of test observations are misclassified.
+
+```{r}
+(1+1+1+12)/45
+```
+
+33.33% of test observations are correctly classified. Based on our cross-validation tuning of our model, we found that the most optimal value of cost was 10 and gamma was 0.5. 66.67% error rate is rather high, which could hinder our hypothesis. However, if we were to pick one student at random, and try to guess their Grade value for their GPA, we would have 1/6 (16.67%) chance of getting it right. So our SVM model predicts a student's Grade value for their GPA more accurately than picking at random. Given this understanding of our model’s performance, we say that our hypothesis is correct.
+
+# Conclusion
+
+In our project we shared a survey with our fellow students on the URI campus, and asked them to give us information about their education, work, living, and study habits. Our goal was to see what variables in students’ lives may determine what GPA they achieve. To do this we performed three analyses. Our primary response variables were GPA, the students’ numerical GPA, and Grade, the students’ letter value for their GPA. Our first analysis of a Classification Tree performed with 31.11% accuracy, which was a similar result to our third analysis. Our second analysis was an experimental hypothesis, in which we used a two-class Support Vector Machine to determine if we could classify students as being a part of a study group, or students who study alone, based on their GPA and weekly work hours. This analysis allowed us to view GPA as a predictor variable rather than a response, and provided great results with a 22.22% misclassification error rate. Our final analysis was a k=6 class Support Vector Machine to determine if we can classify students’ letter GPA grade based on an assortment of predictors. This analysis yielded similar results to our Classification Tree, in that our model correctly classified 33.33% of the test observations. We determined that our models were significant, in that randomly selecting a student and guessing their letter GPA grade has a 16.67% chance of being accurate, so our models performed better than randomly guessing. Of course, we could always have made changes in hindsight that would help us in further analysis.
+
+Exploring our dataset for trends that we could isolate using the techniques we learned in class, we found that there might be other interesting relationships we might like to explore.  We did observe that our dataset did not have perhaps the widest range of GPA’s, noting that between 3.1-3.6 was around the most prominent based on the GPA’s of our respondents.  Sampling a larger number of college students could give us a better picture of how these variables interact.  Additionally, if we could find ways of measuring intrinsic values of a given student via predetermined metrics of some sort, such as self-motivation, situational awareness, conscientiousness, grit, etc., we could perhaps uncover some interesting relationships between them and overall academic performance, which we measured using an interval of GPAs and assigning them letter grades, as mentioned previously.  In summary, a larger sample size with more variables to choose from could improve the quality and accuracy of some of our models in predicting future academic performance.
